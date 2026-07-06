@@ -1,0 +1,18 @@
+/* Minimal document base. The page surface is painted by `.mc-root` in
+   src/marketing/mccann/mccann.css; here we only zero the document margins
+   and set McCann's near-black canvas behind the app so there is no flash
+   before the React tree mounts. Hebrew, RTL. */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: #141114; /* --mc-ink */
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100svh;
+}

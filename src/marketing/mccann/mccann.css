@@ -1,0 +1,984 @@
+/* =============================================================
+   mccann.css — bar-for-mccann, McCann Tel Aviv's visual language
+   read live off mccann.co.il in Chrome (2026-07-06).
+
+   The system: a near-black canvas (#141114) with off-white section
+   flips (#F7F8F6); electric blue (#3021F5) as the only loud accent;
+   huge stacked all-caps Inter display words at ~0.85 leading; giant
+   Hebrew section headlines; hairline rules everywhere; circular
+   outlined arrow buttons; grayscale marquee rows split by blue
+   dashes; campaign cards with underline-rule captions; numbered
+   "job" cards with a hand-drawn sketch underline. RTL throughout,
+   written in logical properties. Overrides the .mp-root base.
+   ============================================================= */
+
+.mc-root {
+  --mc-ink: #141114;        /* their near-black canvas */
+  --mc-ink-2: #1d191d;      /* raised card on black */
+  --mc-paper: #f7f8f6;      /* their off-white flip */
+  --mc-white: #ffffff;
+  --mc-blue: #3021f5;       /* their electric blue */
+  --mc-blue-soft: #4a3df7;
+  --mc-red: #790000;        /* sub-brand red, sparing */
+  --mc-gray: #707070;       /* their logo/caption gray */
+  --mc-gray-dark: #565656;  /* AA-safe small gray on paper */
+  --mc-body: rgba(255, 255, 255, 0.86);
+  --mc-dim: rgba(255, 255, 255, 0.6);
+  --mc-line: rgba(255, 255, 255, 0.26);
+  --mc-line-ink: rgba(20, 17, 20, 0.22);
+
+  --mc-font-heb: var(--font-mc-heb), 'Heebo', 'Arial Hebrew', system-ui, sans-serif;
+  --mc-font-en: var(--font-mc-en), 'Inter', 'Helvetica Neue', system-ui, sans-serif;
+
+  --mc-maxw: 1280px;
+  --mc-pad: clamp(1.25rem, 5vw, 4rem);
+
+  background: var(--mc-ink);
+  color: var(--mc-body);
+  font-family: var(--mc-font-heb);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.mc-root ::selection {
+  background: var(--mc-blue);
+  color: var(--mc-white);
+}
+
+.mc-root :where(button, a):focus-visible {
+  outline: 3px solid var(--mc-blue-soft);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.mc-root .skip-link {
+  background: var(--mc-blue);
+  color: var(--mc-white);
+}
+
+.mc-container {
+  max-inline-size: var(--mc-maxw);
+  margin-inline: auto;
+  padding-inline: var(--mc-pad);
+}
+
+/* ── The display register: stacked all-caps Inter, tight leading, the
+      "TRUTH WELL TOLD" treatment. Rendered LTR inside the RTL page. ── */
+/* scoped as .mc-root .mc-* so these beat the .mp-root h1/h2/h3 base rules */
+.mc-root .mc-display {
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.015em;
+  color: var(--mc-white);
+  margin: 0;
+  direction: ltr;
+  text-align: start;
+}
+
+.mc-display > span {
+  display: block;
+}
+
+/* ── Hebrew giant section headline, their ~98px register. ── */
+.mc-root .mc-h2 {
+  font-family: var(--mc-font-heb);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 7.5vw, 5.8rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--mc-white);
+  margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+}
+
+.mc-eyebrow {
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--mc-blue-soft);
+  letter-spacing: 0.02em;
+  margin-block-end: 0.9rem;
+}
+
+/* underlined text link, their "עוד עלינו" register */
+.mc-link {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: color 0.2s ease;
+}
+
+.mc-link:hover {
+  color: var(--mc-blue-soft);
+}
+
+/* ── Circular outlined arrow button, their signature control. ── */
+.mc-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: clamp(3.4rem, 6vw, 4.5rem);
+  block-size: clamp(3.4rem, 6vw, 4.5rem);
+  border-radius: 999px;
+  border: 1px solid var(--mc-line);
+  background: transparent;
+  color: var(--mc-white);
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.mc-circle svg {
+  inline-size: 42%;
+  block-size: 42%;
+}
+
+.mc-circle:hover {
+  background: var(--mc-blue);
+  border-color: var(--mc-blue);
+  transform: translateY(3px);
+}
+
+/* =============================================================
+   Nav — black, fixed, RTL items split by "/" with a dot over the
+   active first item, wordmark at the inline start.
+   ============================================================= */
+.mc-nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 60;
+  background: linear-gradient(to bottom, rgba(20, 17, 20, 0.94), rgba(20, 17, 20, 0.82));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mc-nav-inner {
+  max-inline-size: var(--mc-maxw);
+  margin-inline: auto;
+  padding: 0.95rem var(--mc-pad);
+  display: flex;
+  /* their layout: links on the right (RTL start of reading), brand far left */
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.mc-wordmark {
+  font-family: var(--mc-font-en);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  color: var(--mc-white);
+  text-decoration: none;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.mc-wordmark b {
+  font-weight: 700;
+}
+
+.mc-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 0.98rem;
+}
+
+.mc-nav-links a {
+  position: relative;
+  color: var(--mc-white);
+  text-decoration: none;
+  padding: 0.35rem 0.2rem;
+  transition: color 0.2s ease;
+}
+
+.mc-nav-links a:hover {
+  color: var(--mc-blue-soft);
+}
+
+/* the dot over the active (first) item, their active marker */
+.mc-nav-links a.is-here::before {
+  content: '';
+  position: absolute;
+  inset-block-start: -0.35rem;
+  inset-inline-start: 50%;
+  transform: translateX(50%);
+  inline-size: 5px;
+  block-size: 5px;
+  border-radius: 999px;
+  background: var(--mc-white);
+}
+
+.mc-nav-sep {
+  color: var(--mc-dim);
+  padding-inline: 0.85rem;
+  font-size: 0.85rem;
+  user-select: none;
+}
+
+@media (max-width: 860px) {
+  .mc-nav-links {
+    display: none;
+  }
+}
+
+/* =============================================================
+   Hero — full-viewport black, small wordmark that reveals above
+   the stacked display, Hebrew subline, circle down-arrow, and a
+   rail of circular project thumbnails on the visual left.
+   ============================================================= */
+.mc-hero {
+  position: relative;
+  min-block-size: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: 7rem 4rem;
+}
+
+.mc-hero-inner {
+  display: grid;
+  /* RTL: the copy column sits at the right, the thumbnail rail floats far
+     left, mirroring their left-rail hero */
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+  inline-size: 100%;
+}
+
+/* the hero reads from the right, like their Hebrew section headlines */
+.mc-hero-copy {
+  text-align: start;
+}
+
+.mc-hero-copy .mc-display,
+.mc-hero-copy .mc-hero-mark {
+  text-align: end; /* LTR words, flush to the right edge of the RTL column */
+}
+
+/* the small "bar for McCANN" mark that slides in above the headline,
+   like their McCANN wordmark does on first scroll */
+.mc-hero-mark {
+  font-family: var(--mc-font-en);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 2.6vw, 1.9rem);
+  letter-spacing: 0.01em;
+  color: var(--mc-white);
+  direction: ltr;
+  text-align: start;
+  margin-block-end: 0.8rem;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mc-hero-mark .mc-dot {
+  display: inline-block;
+  inline-size: 0.5em;
+  block-size: 0.5em;
+  border-radius: 999px;
+  background: var(--mc-blue);
+  margin-inline-start: 0.3em;
+}
+
+.mc-hero.is-marked .mc-hero-mark {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mc-root .mc-hero-display {
+  font-size: clamp(3.4rem, 10.5vw, 7.2rem);
+}
+
+.mc-hero-sub {
+  max-inline-size: 34rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: var(--mc-body);
+  margin-block: 1.8rem 2.2rem;
+}
+
+.mc-hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+}
+
+/* the hero thumbnail rail: circular project links, their video rail */
+.mc-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mc-rail a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: clamp(3.4rem, 5.5vw, 4.2rem);
+  block-size: clamp(3.4rem, 5.5vw, 4.2rem);
+  border-radius: 999px;
+  border: 1px solid var(--mc-line);
+  background: var(--mc-ink-2);
+  color: var(--mc-white);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.mc-rail a:hover {
+  transform: scale(1.12);
+  border-color: var(--mc-blue-soft);
+  background: var(--mc-blue);
+}
+
+.mc-rail svg {
+  inline-size: 46%;
+  block-size: 46%;
+}
+
+@media (max-width: 860px) {
+  .mc-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .mc-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* =============================================================
+   Who — Hebrew headline, about text beside a grid of original
+   "sub-brand" lockups (their McCANN ADVERTISING / DIGITAL wall),
+   then the WORLD-CLASS-style stats block with blue # figures.
+   ============================================================= */
+.mc-who {
+  padding-block: clamp(4rem, 9vw, 7.5rem) 0;
+}
+
+.mc-who-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.mc-who-text p {
+  margin: 0 0 1.1rem;
+  max-inline-size: 36rem;
+}
+
+/* sub-brand lockups: "BAR / FULL STACK" in the McCANN sub-brand style */
+.mc-lockups {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.mc-lockup {
+  border-block-start: 1px solid var(--mc-line);
+  padding-block-start: 1.1rem;
+}
+
+.mc-lockup-mark {
+  font-family: var(--mc-font-en);
+  direction: ltr;
+  text-align: end; /* share the right anchor with the Hebrew paragraph */
+  color: var(--mc-white);
+  line-height: 1;
+}
+
+.mc-lockup-mark b {
+  display: block;
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: 0.02em;
+}
+
+.mc-lockup-mark i {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  margin-block-start: 0.3rem;
+  color: var(--mc-gray);
+}
+
+.mc-lockup:nth-child(2) .mc-lockup-mark i {
+  color: #c96a5a; /* the sub-brand red register, lifted for AA on black */
+}
+
+.mc-lockup p {
+  margin: 0.8rem 0 0;
+  font-size: 0.99rem;
+  color: var(--mc-body);
+  max-inline-size: 30rem;
+}
+
+@media (max-width: 860px) {
+  .mc-who-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* the stats block: stacked display beside blue #-figures */
+.mc-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+  border-block-start: 1px solid var(--mc-line);
+  margin-block-start: clamp(3rem, 7vw, 5rem);
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.mc-root .mc-stats-display {
+  font-size: clamp(3rem, 7.5vw, 5.6rem);
+  text-align: end; /* mirrored WORLD-CLASS block: flush right in RTL */
+}
+
+.mc-stat-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.mc-stat-label {
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--mc-white);
+  margin: 0 0 1rem;
+  direction: ltr;
+  text-align: start;
+}
+
+.mc-stat-row {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  flex-wrap: wrap;
+}
+
+.mc-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  direction: ltr;
+}
+
+.mc-stat .hash {
+  font-family: var(--mc-font-en);
+  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--mc-blue-soft);
+  line-height: 1;
+}
+
+.mc-stat .num {
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  color: var(--mc-white);
+  line-height: 1;
+}
+
+.mc-stat .lbl {
+  font-size: 0.95rem;
+  color: var(--mc-dim);
+  text-transform: uppercase;
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+@media (max-width: 860px) {
+  .mc-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Work — the off-white flip: giant Hebrew headline, grayscale
+   marquee rows split by blue dashes with a blue pause circle,
+   then the campaign-card grid with underline-rule captions.
+   ============================================================= */
+.mc-work {
+  background: var(--mc-paper);
+  color: var(--mc-ink);
+  padding-block: clamp(4rem, 9vw, 7.5rem);
+}
+
+.mc-root .mc-work .mc-h2 {
+  color: var(--mc-ink);
+  text-align: start;
+}
+
+.mc-work .mc-eyebrow {
+  color: var(--mc-blue);
+}
+
+/* marquee rows, their client-logo wall */
+.mc-marquee-wrap {
+  position: relative;
+  padding-block: 1rem 2.5rem;
+}
+
+.mc-marquee {
+  overflow: hidden;
+  direction: ltr; /* the track animates in one axis; content is language-neutral */
+  margin-block-end: 1.4rem;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.mc-marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+  padding-inline-end: 2.2rem;
+  white-space: nowrap;
+  animation: mc-marq 36s linear infinite;
+  will-change: transform;
+}
+
+.mc-marquee.is-reverse .mc-marquee-track {
+  animation-direction: reverse;
+  animation-duration: 42s;
+}
+
+.mc-root.is-paused .mc-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes mc-marq {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.mc-marq-item {
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+  letter-spacing: 0.01em;
+  color: var(--mc-gray);
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+}
+
+/* the blue dash between items, their logo separator */
+.mc-dash {
+  display: inline-block;
+  inline-size: 26px;
+  block-size: 3px;
+  background: var(--mc-blue);
+  flex: none;
+}
+
+/* blue circular pause control, bottom corner of the wall */
+.mc-pause {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline-start: 0;
+  inline-size: 3.2rem;
+  block-size: 3.2rem;
+  border-radius: 999px;
+  border: 0;
+  background: var(--mc-blue);
+  color: var(--mc-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.mc-pause:hover {
+  transform: scale(1.08);
+  background: var(--mc-blue-soft);
+}
+
+.mc-pause svg {
+  inline-size: 38%;
+  block-size: 38%;
+}
+
+/* campaign cards */
+.mc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+  margin-block-start: clamp(2.5rem, 5vw, 4rem);
+}
+
+.mc-card {
+  display: block;
+  text-decoration: none;
+  color: var(--mc-ink);
+}
+
+/* the staggered rhythm of their carousel: even cards sit lower */
+@media (min-width: 861px) {
+  .mc-card:nth-child(even) {
+    transform: translateY(2.2rem);
+  }
+}
+
+.mc-poster {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--mc-ink);
+  color: var(--mc-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mc-poster svg {
+  inline-size: 44%;
+  block-size: 44%;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.35s ease;
+}
+
+.mc-poster .mc-poster-idx {
+  position: absolute;
+  inset-block-start: 0.7rem;
+  inset-inline-start: 0.9rem;
+  font-family: var(--mc-font-en);
+  font-weight: 200;
+  font-size: 1.6rem;
+  color: var(--mc-dim);
+  z-index: 1;
+  direction: ltr;
+}
+
+/* blue veil that rises on hover */
+.mc-poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--mc-blue);
+  transform: translateY(101%);
+  transition: transform 0.35s ease;
+}
+
+.mc-card:hover .mc-poster::after {
+  transform: translateY(72%);
+}
+
+.mc-card:hover .mc-poster svg {
+  transform: translateY(-8px) scale(1.06);
+}
+
+.mc-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap; /* a long Hebrew tag drops to its own line, never a sliver */
+  gap: 0.15rem 1rem;
+  padding-block: 0.8rem 0.7rem;
+  border-block-end: 1px solid var(--mc-line-ink);
+  transition: border-color 0.25s ease;
+}
+
+.mc-card:hover .mc-caption {
+  border-block-end-color: var(--mc-blue);
+}
+
+.mc-caption b {
+  font-family: var(--mc-font-en);
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.mc-caption span {
+  font-size: 0.9rem;
+  color: var(--mc-gray-dark);
+  text-align: start;
+}
+
+.mc-work-note {
+  margin-block-start: clamp(3.2rem, 6vw, 4.5rem);
+  color: var(--mc-gray-dark);
+  font-size: 0.98rem;
+  max-inline-size: 44rem;
+}
+
+@media (max-width: 1100px) {
+  .mc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .mc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Close — their numbered-jobs board: the big "05" opening with a
+   hand-drawn sketch underline, then numbered contact cards.
+   ============================================================= */
+.mc-close {
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+}
+
+.mc-close-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+  margin-block-start: clamp(2.5rem, 5vw, 4rem);
+}
+
+.mc-open-role {
+  border-block-start: 1px solid var(--mc-line);
+  padding-block-start: 1.4rem;
+}
+
+.mc-open-num {
+  position: relative;
+  display: inline-block;
+  font-family: var(--mc-font-en);
+  font-weight: 200;
+  font-size: clamp(6rem, 14vw, 10rem);
+  line-height: 0.9;
+  color: var(--mc-white);
+  direction: ltr;
+}
+
+.mc-open-num svg {
+  position: absolute;
+  inset-block-end: -0.12em;
+  inset-inline-start: -6%;
+  inline-size: 112%;
+  block-size: 0.36em;
+  color: var(--mc-white);
+}
+
+.mc-open-title {
+  font-family: var(--mc-font-en);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--mc-white);
+  margin: 1.6rem 0 0.4rem;
+  direction: ltr;
+  text-align: start;
+}
+
+.mc-open-name {
+  color: var(--mc-dim);
+  font-size: 1.05rem;
+}
+
+.mc-ccards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.mc-ccard {
+  display: block;
+  text-decoration: none;
+  border-block-start: 1px solid var(--mc-line);
+  padding-block: 1.1rem 0.6rem;
+  color: var(--mc-white);
+  transition: border-color 0.25s ease;
+}
+
+.mc-ccard:hover {
+  border-block-start-color: var(--mc-blue-soft);
+}
+
+.mc-ccard-num {
+  font-family: var(--mc-font-en);
+  font-weight: 200;
+  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+  line-height: 1;
+  direction: ltr;
+}
+
+.mc-ccard-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block-start: 0.7rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.mc-ccard-label svg {
+  inline-size: 1.05rem;
+  block-size: 1.05rem;
+  color: var(--mc-dim);
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+.mc-ccard:hover .mc-ccard-label svg {
+  color: var(--mc-blue-soft);
+  transform: translateX(-4px); /* toward the reading direction in RTL */
+}
+
+.mc-ccard-hint {
+  font-size: 0.88rem;
+  color: var(--mc-dim);
+  margin-block-start: 0.2rem;
+}
+
+@media (max-width: 860px) {
+  .mc-close-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .mc-ccards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Footer — black, hairline top, RTL columns, underlined links.
+   ============================================================= */
+.mc-footer {
+  border-block-start: 1px solid var(--mc-line);
+  padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
+}
+
+.mc-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.mc-footer-col h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--mc-white);
+  margin: 0 0 0.8rem;
+}
+
+.mc-footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.mc-footer-col a {
+  color: var(--mc-body);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: color 0.2s ease;
+}
+
+.mc-footer-col a:hover {
+  color: var(--mc-blue-soft);
+}
+
+.mc-footer-col p {
+  margin: 0;
+  color: var(--mc-body);
+}
+
+.mc-footer-note {
+  margin-block-start: clamp(2.5rem, 5vw, 3.5rem);
+  padding-block-start: 1.4rem;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--mc-dim);
+  font-size: 0.88rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mc-footer-note .mc-wordmark {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+  .mc-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Reveal-on-scroll + reduced motion.
+   ============================================================= */
+.mc-root [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.mc-root [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 861px) {
+  /* keep the staggered card offset while still revealing */
+  .mc-card:nth-child(even)[data-reveal] {
+    transform: translateY(calc(2.2rem + 26px));
+  }
+
+  .mc-card:nth-child(even)[data-reveal].is-in {
+    transform: translateY(2.2rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-root [data-reveal],
+  .mc-hero-mark {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .mc-root .mc-marquee-track {
+    animation: none !important;
+    /* let the row wrap statically so nothing is hidden */
+    white-space: normal;
+    flex-wrap: wrap;
+  }
+
+  .mc-root .mc-pause {
+    display: none;
+  }
+
+  .mc-root *,
+  .mc-root *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
