@@ -35,6 +35,10 @@ import './mccann.css';
 
 const EMAIL = 'mailto:1barmoshe1@gmail.com?subject=בר עבור מקאן';
 const CV = '/Bar_Moshe_CV_McCann.pdf';
+/* the GitHub Pages mirror serves under /bar-for-mccann; basePath does not
+   rewrite plain hrefs, so public-asset links get this build-time prefix.
+   CV stays a plain string constant for cv-forge's rewiring. */
+const CV_HREF = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${CV}`;
 const LINKEDIN = 'https://www.linkedin.com/in/barmoshe/';
 const GITHUB = 'https://github.com/barmoshe';
 const WHATSAPP = 'https://wa.me/972546561465';
@@ -441,7 +445,7 @@ export default function McCannApp() {
                 <a className="mc-link" href="#mc-work">
                   ישר לעבודות
                 </a>
-                <a className="mc-link" href={CV} target="_blank" rel="noreferrer">
+                <a className="mc-link" href={CV_HREF} target="_blank" rel="noreferrer">
                   קורות חיים (PDF)
                 </a>
               </div>
@@ -640,7 +644,7 @@ export default function McCannApp() {
                 </a>
                 <a
                   className="mc-ccard"
-                  href={CV}
+                  href={CV_HREF}
                   target="_blank"
                   rel="noreferrer"
                   data-reveal
@@ -706,7 +710,7 @@ export default function McCannApp() {
                   </a>
                 </li>
                 <li>
-                  <a href={CV} target="_blank" rel="noreferrer">
+                  <a href={CV_HREF} target="_blank" rel="noreferrer">
                     קורות חיים (PDF)
                   </a>
                 </li>

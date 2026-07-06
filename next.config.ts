@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
         output: "export" as const,
         basePath: "/bar-for-mccann",
         images: { unoptimized: true },
+        // basePath does NOT rewrite plain <a href> strings (the CV PDF link),
+        // so the app prefixes public-asset hrefs with this at build time.
+        env: { NEXT_PUBLIC_BASE_PATH: "/bar-for-mccann" },
       }
     : {}),
 };
