@@ -6,6 +6,9 @@ import { ImageResponse } from 'next/og';
 // blue accent. Text is kept Latin so Satori renders reliably without loading
 // a Hebrew webfont at the edge. Flexbox-only CSS, plain hex colours.
 
+// statically generated at build time so the GH_PAGES static export works too
+export const dynamic = 'force-static';
+
 export const alt =
   'bar for McCann — a Hebrew application page in McCann\'s own visual language. Real shipped work, live links.';
 export const size = { width: 1200, height: 630 };
