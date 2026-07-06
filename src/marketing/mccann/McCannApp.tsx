@@ -506,37 +506,35 @@ export default function McCannApp() {
               </h3>
               <div className="mc-stat-groups" data-reveal>
                 <div>
-                  <p className="mc-stat-label">2026 Live Index</p>
-                  <div className="mc-stat-row">
-                    <div className="mc-stat">
+                  <p className="mc-stat-label">The Range</p>
+                  <ul className="mc-range">
+                    <li>
                       <span className="hash" aria-hidden="true">
                         #
                       </span>
-                      <span className="num">10</span>
-                      <span className="lbl">
-                        עבודות
-                        <br />
-                        חיות
-                      </span>
-                    </div>
-                    <div className="mc-stat">
+                      כלי מפתחים בקוד פתוח
+                    </li>
+                    <li>
                       <span className="hash" aria-hidden="true">
                         #
                       </span>
-                      <span className="num">6</span>
-                      <span className="lbl">
-                        חבילות
-                        <br />
-                        npm
+                      סוכני AI ותהליכים שרצים לבד
+                    </li>
+                    <li>
+                      <span className="hash" aria-hidden="true">
+                        #
                       </span>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <p className="mc-stat-label">Recognition</p>
-                  <p style={{ margin: 0, maxInlineSize: '26rem' }}>
-                    ה-Temporal Data Service שלי מוצג ב-Temporal Code Exchange,
-                    ו-MDP ו-Entailer חיים על npm עם אתרי דוקומנטציה משלהם.
+                      אפליקציות מוצר מקצה לקצה
+                    </li>
+                    <li>
+                      <span className="hash" aria-hidden="true">
+                        #
+                      </span>
+                      גרפיקה, אודיו ומשחקים בדפדפן
+                    </li>
+                  </ul>
+                  <p className="mc-range-note">
+                    הכול חי ברשת, והכול נפתח בקליק אחד, ממש כאן למטה.
                   </p>
                 </div>
               </div>

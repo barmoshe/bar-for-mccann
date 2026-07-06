@@ -465,43 +465,38 @@
   text-align: start;
 }
 
-.mc-stat-row {
+/* the range list: their blue-# stat register, abstract instead of counted */
+.mc-range {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1.1rem;
 }
 
-.mc-stat {
+.mc-range li {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  direction: ltr;
+  gap: 0.7rem;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  font-weight: 500;
+  color: var(--mc-white);
+  line-height: 1.2;
 }
 
-.mc-stat .hash {
+.mc-range .hash {
   font-family: var(--mc-font-en);
   font-weight: 700;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
   color: var(--mc-blue-soft);
   line-height: 1;
 }
 
-.mc-stat .num {
-  font-family: var(--mc-font-en);
-  font-weight: 600;
-  font-size: clamp(2.6rem, 5vw, 3.8rem);
-  color: var(--mc-white);
-  line-height: 1;
-}
-
-.mc-stat .lbl {
-  font-size: 0.95rem;
+.mc-range-note {
+  margin: 1.4rem 0 0;
   color: var(--mc-dim);
-  text-transform: uppercase;
-  font-family: var(--mc-font-en);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
+  font-size: 1rem;
 }
 
 @media (max-width: 860px) {
