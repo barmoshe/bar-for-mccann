@@ -1,0 +1,1046 @@
+/* =============================================================
+   primis.css — the /primis route, primis.tech's visual language
+   read live off primis.tech in Chrome (2026-07-06).
+
+   The system: deep navy (#00152A) full-bleed heroes with a rotating
+   hot-pink (#FF1455) word, Poppins everywhere (400/500 headings),
+   fully-round pink pill CTAs with arrows, the [bracket] wordmark and
+   a </code.styled> nav item, diagonal ↘ arrows, a tilted outlined
+   player card, an isometric line-art centerpiece with dotted n/4
+   callouts, pill category tabs, a navy stats/chart band, and the
+   Open Positions hairline-row list. English, LTR. Overrides the
+   .mp-root base; typography scoped .pr-root .pr-* to outrank it.
+   ============================================================= */
+
+.pr-root {
+  --pr-navy: #00152a;
+  --pr-navy-2: #04223f;
+  --pr-pink: #ff1455;
+  --pr-pink-2: #ff3e5f;
+  --pr-white: #ffffff;
+  --pr-gray: #f1f1f1;
+  --pr-gray-2: #f7f7f7;
+  --pr-body: #33475b;
+  --pr-dim: rgba(255, 255, 255, 0.55);
+  --pr-line: rgba(0, 21, 42, 0.16);
+  --pr-line-light: rgba(255, 255, 255, 0.22);
+
+  --pr-font: var(--font-pr), 'Poppins', 'Segoe UI', system-ui, sans-serif;
+
+  --pr-maxw: 1280px;
+  --pr-pad: clamp(1.25rem, 5vw, 4rem);
+
+  background: var(--pr-white);
+  color: var(--pr-navy);
+  font-family: var(--pr-font);
+  font-size: 17px;
+  line-height: 1.6;
+  direction: ltr;
+}
+
+.pr-root ::selection {
+  background: var(--pr-pink);
+  color: var(--pr-white);
+}
+
+.pr-root :where(button, a):focus-visible {
+  outline: 3px solid var(--pr-pink-2);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.pr-root .skip-link {
+  background: var(--pr-pink);
+  color: var(--pr-white);
+}
+
+.pr-container {
+  max-inline-size: var(--pr-maxw);
+  margin-inline: auto;
+  padding-inline: var(--pr-pad);
+}
+
+/* ── Type registers (scoped to beat .mp-root h1/h2/h3). ── */
+.pr-root .pr-h2 {
+  font-family: var(--pr-font);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--pr-navy);
+  margin: 0 0 1.2rem;
+}
+
+.pr-root .pr-h2 .dim {
+  color: #9aa6b1;
+  font-weight: 400;
+}
+
+.pr-root .pr-h2.on-navy {
+  color: var(--pr-white);
+}
+
+.pr-root .pr-h2.on-navy .dim {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.pr-sub {
+  color: var(--pr-body);
+  max-inline-size: 34rem;
+  margin: 0;
+}
+
+/* ── The pink pill CTA, their exact register. ── */
+.pr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--pr-pink);
+  color: var(--pr-white);
+  font-family: var(--pr-font);
+  font-size: 1rem;
+  font-weight: 500;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.72rem 2rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.pr-pill:hover {
+  background: var(--pr-pink-2);
+  transform: translateY(-2px);
+}
+
+.pr-pill svg {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+}
+
+.pr-ghost {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+
+.pr-ghost:hover {
+  color: var(--pr-pink-2);
+}
+
+/* the ↘ diagonal arrow glyph */
+.pr-diag {
+  display: inline-flex;
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+  color: currentColor;
+  flex: none;
+}
+
+/* =============================================================
+   Nav — navy blur bar, [bracket] wordmark, code-styled item.
+   ============================================================= */
+.pr-nav {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 60;
+  background: rgba(0, 21, 42, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pr-nav-inner {
+  max-inline-size: var(--pr-maxw);
+  margin-inline: auto;
+  padding: 0.9rem var(--pr-pad);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: var(--pr-white);
+}
+
+.pr-wordmark {
+  font-family: var(--pr-font);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  color: var(--pr-white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pr-wordmark .bracket {
+  color: var(--pr-pink);
+}
+
+.pr-nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  font-size: 0.98rem;
+}
+
+.pr-nav-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--pr-white);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pr-nav-links a:hover {
+  color: var(--pr-pink-2);
+}
+
+.pr-nav-links .pr-diag {
+  inline-size: 1rem;
+  block-size: 1rem;
+  color: var(--pr-pink);
+}
+
+/* the </sellers.guide>-style code item */
+.pr-code-link {
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 860px) {
+  .pr-nav-links {
+    display: none;
+  }
+}
+
+/* =============================================================
+   Hero — navy full viewport, original line-art seascape with a
+   blinking pink beacon, pill tabs, "PUSH FOR MORE <word>".
+   ============================================================= */
+.pr-hero {
+  position: relative;
+  min-block-size: 100svh;
+  background: linear-gradient(180deg, #021a33 0%, var(--pr-navy) 55%, #001020 100%);
+  color: var(--pr-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  padding-block: 6.5rem 3.5rem;
+}
+
+.pr-hero-art {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+}
+
+.pr-hero-art svg {
+  position: absolute;
+  inset-block-end: 0;
+  inset-inline: 0;
+  inline-size: 100%;
+  block-size: min(72vh, 640px);
+}
+
+/* slow sea drift + the lighthouse beacon blink */
+.pr-waves {
+  animation: pr-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes pr-drift {
+  from {
+    transform: translateX(-14px);
+  }
+  to {
+    transform: translateX(14px);
+  }
+}
+
+.pr-beacon {
+  animation: pr-blink 3.2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes pr-blink {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  12% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 0.25;
+  }
+}
+
+.pr-beam {
+  animation: pr-beam 6.4s ease-in-out infinite alternate;
+  transform-origin: 0 50%;
+}
+
+@keyframes pr-beam {
+  from {
+    transform: rotate(-7deg);
+    opacity: 0.14;
+  }
+  to {
+    transform: rotate(7deg);
+    opacity: 0.3;
+  }
+}
+
+/* pill tab row, their careers-hero register */
+.pr-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-block-end: auto;
+}
+
+.pr-tab {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  padding: 0.42rem 1.4rem;
+  color: var(--pr-white);
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pr-tab:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.pr-tab.is-active {
+  background: var(--pr-white);
+  color: var(--pr-navy);
+  border-color: var(--pr-white);
+}
+
+.pr-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: end;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-block-start: 2.5rem;
+}
+
+.pr-root .pr-hero-h {
+  font-family: var(--pr-font);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6.4vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--pr-white);
+  margin: 0;
+}
+
+/* the rotating word */
+.pr-rotator {
+  display: inline-block;
+  color: var(--pr-pink);
+  min-inline-size: 8ch;
+}
+
+/* each word remounts (React key), so it animates in on mount */
+.pr-rotator .word {
+  display: inline-block;
+  animation: pr-word-in 0.45s ease both;
+}
+
+@keyframes pr-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.pr-hero-side {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.4rem;
+}
+
+.pr-hero-side p {
+  margin: 0;
+  max-inline-size: 26rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.pr-hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.pr-hero-down {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-block-start: 2.2rem;
+}
+
+.pr-hero-down a {
+  color: rgba(255, 255, 255, 0.75);
+  display: inline-flex;
+  animation: pr-bob 2.4s ease-in-out infinite;
+}
+
+.pr-hero-down svg {
+  inline-size: 2.2rem;
+  block-size: 2.2rem;
+}
+
+@keyframes pr-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+@media (max-width: 860px) {
+  .pr-hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pr-hero-side {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+/* =============================================================
+   Heights — white, headline left, tilted outlined player right.
+   ============================================================= */
+.pr-heights {
+  padding-block: clamp(4rem, 9vw, 7rem);
+  overflow: hidden;
+}
+
+.pr-heights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+/* the tilted player: offset navy outline frame behind a white card */
+.pr-player-wrap {
+  position: relative;
+  transform: rotate(-5deg);
+}
+
+.pr-player-frame {
+  position: absolute;
+  inset: 0;
+  transform: translate(16px, 14px);
+  border: 2.5px solid var(--pr-navy);
+  border-radius: 22px;
+}
+
+.pr-player {
+  position: relative;
+  background: var(--pr-white);
+  border: 2.5px solid var(--pr-navy);
+  border-radius: 22px;
+  padding: 1rem;
+  box-shadow: 0 24px 60px rgba(0, 21, 42, 0.14);
+}
+
+.pr-screen {
+  position: relative;
+  background: var(--pr-navy);
+  border-radius: 14px;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  color: var(--pr-white);
+  overflow: hidden;
+}
+
+.pr-screen svg {
+  inline-size: 3.6rem;
+  block-size: 3.6rem;
+}
+
+.pr-screen-name {
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.pr-screen-tag {
+  font-size: 0.85rem;
+  color: var(--pr-dim);
+}
+
+.pr-screen-live {
+  position: absolute;
+  inset-block-start: 0.8rem;
+  inset-inline-start: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pr-screen-live i {
+  inline-size: 0.55rem;
+  block-size: 0.55rem;
+  border-radius: 999px;
+  background: var(--pr-pink);
+  animation: pr-blink 2.4s ease-in-out infinite;
+}
+
+.pr-screen-open {
+  margin-block-start: 0.3rem;
+  font-size: 0.9rem;
+  color: var(--pr-pink-2);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.pr-thumbs {
+  display: flex;
+  gap: 0.6rem;
+  padding-block-start: 0.9rem;
+  align-items: center;
+}
+
+.pr-thumb {
+  flex: 1;
+  aspect-ratio: 16 / 10;
+  border: 1.5px solid var(--pr-line);
+  border-radius: 8px;
+  background: var(--pr-gray-2);
+  color: var(--pr-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.pr-thumb svg {
+  inline-size: 1.4rem;
+  block-size: 1.4rem;
+}
+
+.pr-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.pr-thumb.is-on {
+  border-color: var(--pr-pink);
+  background: #fff0f4;
+  color: var(--pr-pink);
+}
+
+@media (max-width: 860px) {
+  .pr-heights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Discovery — the isometric centerpiece with dotted n/4 callouts.
+   ============================================================= */
+.pr-discovery {
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.pr-discovery .pr-h2 {
+  text-align: center;
+  margin-block-end: clamp(2rem, 5vw, 3.5rem);
+}
+
+.pr-disc-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(320px, 640px) 1fr;
+  grid-template-rows: auto auto;
+  gap: clamp(1.5rem, 3.5vw, 2.5rem);
+  align-items: start;
+}
+
+.pr-disc-art {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+
+.pr-disc-art svg {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.pr-callout {
+  max-inline-size: 21rem;
+}
+
+.pr-callout .co-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-block-end: 1.5px dotted rgba(0, 21, 42, 0.4);
+  padding-block-end: 0.45rem;
+  margin-block-end: 0.6rem;
+}
+
+.pr-callout .co-head b {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--pr-navy);
+}
+
+.pr-callout .co-n {
+  font-weight: 600;
+  color: var(--pr-navy);
+  font-size: 0.95rem;
+}
+
+.pr-callout .co-n span {
+  color: #9aa6b1;
+  font-weight: 400;
+}
+
+.pr-callout p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--pr-body);
+}
+
+.pr-callout.co-1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+.pr-callout.co-2 {
+  grid-column: 3;
+  grid-row: 1;
+}
+.pr-callout.co-3 {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
+}
+.pr-callout.co-4 {
+  grid-column: 3;
+  grid-row: 2;
+  align-self: end;
+}
+
+@media (max-width: 1000px) {
+  .pr-disc-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: none;
+  }
+
+  .pr-disc-art {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .pr-callout.co-1,
+  .pr-callout.co-2,
+  .pr-callout.co-3,
+  .pr-callout.co-4 {
+    grid-column: auto;
+    grid-row: auto;
+    max-inline-size: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .pr-disc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Work — light gray, pill tabs filter the build cards.
+   ============================================================= */
+.pr-work {
+  background: var(--pr-gray-2);
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.pr-work-head {
+  text-align: center;
+  margin-block-end: 2rem;
+}
+
+.pr-work-head .pr-sub {
+  margin-inline: auto;
+}
+
+.pr-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-block: 1.8rem 2.4rem;
+}
+
+.pr-filter {
+  border: 1.5px solid var(--pr-navy);
+  background: transparent;
+  color: var(--pr-navy);
+  font-family: var(--pr-font);
+  font-size: 0.98rem;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pr-filter:hover {
+  background: rgba(0, 21, 42, 0.07);
+}
+
+.pr-filter.is-active {
+  background: var(--pr-navy);
+  color: var(--pr-white);
+}
+
+.pr-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.pr-card {
+  background: var(--pr-white);
+  border-radius: 16px;
+  padding: 1.4rem 1.4rem 1.2rem;
+  text-decoration: none;
+  color: var(--pr-navy);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border: 1.5px solid transparent;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pr-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--pr-pink);
+  box-shadow: 0 18px 40px rgba(0, 21, 42, 0.1);
+}
+
+.pr-card svg {
+  inline-size: 2rem;
+  block-size: 2rem;
+  color: var(--pr-pink);
+}
+
+.pr-card b {
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.pr-card .tag {
+  font-size: 0.85rem;
+  color: var(--pr-body);
+}
+
+.pr-card .go {
+  margin-block-start: auto;
+  padding-block-start: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--pr-pink);
+}
+
+.pr-work-note {
+  text-align: center;
+  color: var(--pr-body);
+  font-size: 0.95rem;
+  margin-block-start: 2.4rem;
+}
+
+@media (max-width: 1000px) {
+  .pr-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .pr-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Results band — navy, two-tone headline + the pink line chart.
+   ============================================================= */
+.pr-results {
+  background: var(--pr-navy);
+  color: var(--pr-white);
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.pr-results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.pr-results p {
+  color: rgba(255, 255, 255, 0.88);
+  max-inline-size: 30rem;
+}
+
+.pr-chart {
+  inline-size: 100%;
+  block-size: auto;
+}
+
+/* the line draws itself in when revealed */
+.pr-chart .curve {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  transition: stroke-dashoffset 2.2s ease 0.3s;
+}
+
+.is-in .pr-chart .curve {
+  stroke-dashoffset: 0;
+}
+
+.pr-chart-caption {
+  margin-block-start: 0.8rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--pr-dim);
+}
+
+@media (max-width: 860px) {
+  .pr-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Open positions — their hairline-row list, ↘ arrows.
+   ============================================================= */
+.pr-open {
+  padding-block: clamp(4rem, 9vw, 7rem);
+  background: linear-gradient(180deg, var(--pr-white), var(--pr-gray-2));
+}
+
+.pr-open .pr-h2 {
+  text-align: center;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+}
+
+.pr-open-intro {
+  text-align: center;
+  color: var(--pr-body);
+  margin: 0 auto 2.6rem;
+  max-inline-size: 36rem;
+}
+
+.pr-rows {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(2rem, 5vw, 4rem);
+}
+
+.pr-row {
+  border-block-start: 1px solid rgba(0, 21, 42, 0.35);
+  padding-block: 1.3rem 1.6rem;
+  text-decoration: none;
+  color: var(--pr-navy);
+  display: block;
+  transition: border-color 0.2s ease;
+}
+
+.pr-row:hover {
+  border-block-start-color: var(--pr-pink);
+}
+
+.pr-row .row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pr-row .row-top b {
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 500;
+}
+
+.pr-row .pr-diag {
+  color: var(--pr-navy);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.pr-row:hover .pr-diag {
+  color: var(--pr-pink);
+  transform: translate(3px, 3px);
+}
+
+.pr-row .row-more {
+  display: inline-block;
+  margin-block-start: 0.7rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pr-row .row-hint {
+  display: block;
+  color: var(--pr-body);
+  font-size: 0.9rem;
+  margin-block-start: 0.2rem;
+}
+
+.pr-row.is-star .row-top b {
+  color: var(--pr-pink);
+}
+
+@media (max-width: 700px) {
+  .pr-rows {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Footer — navy columns.
+   ============================================================= */
+.pr-footer {
+  background: var(--pr-navy);
+  color: var(--pr-white);
+  padding-block: clamp(2.5rem, 5vw, 4rem) 2rem;
+}
+
+.pr-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.pr-footer h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.8rem;
+  color: var(--pr-white);
+}
+
+.pr-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pr-footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease;
+}
+
+.pr-footer a:hover {
+  color: var(--pr-pink-2);
+}
+
+.pr-footer-note {
+  margin-block-start: 2.5rem;
+  padding-block-start: 1.3rem;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--pr-dim);
+  font-size: 0.88rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 700px) {
+  .pr-footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =============================================================
+   Reveal + reduced motion.
+   ============================================================= */
+.pr-root [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.pr-root [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-root [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .pr-root .pr-waves,
+  .pr-root .pr-beacon,
+  .pr-root .pr-beam,
+  .pr-root .pr-hero-down a,
+  .pr-root .pr-screen-live i {
+    animation: none !important;
+  }
+
+  .pr-root .pr-rotator .word {
+    animation: none;
+  }
+
+  .pr-root .pr-chart .curve {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+
+  .pr-root *,
+  .pr-root *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 
-// Root layout. The page-level metadata (rich OG card, fonts, copy) lives in
-// app/page.tsx; this just establishes the document shell. Hebrew, RTL — the
-// page is a replica of mccann.co.il, McCann Tel Aviv's own site.
+// Root layout for the Hebrew, RTL McCann page. The site has two root layouts
+// (route groups): this one, and app/(primis)/layout.tsx which serves the
+// English LTR /primis route in Primis's visual language.
 export const metadata: Metadata = {
   metadataBase: new URL("https://bar-for-mccann.vercel.app"),
 };
 
-export default function RootLayout({
+export default function McCannLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

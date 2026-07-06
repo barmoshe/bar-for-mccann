@@ -39,6 +39,8 @@ const CV = '/Bar_Moshe_CV_McCann.pdf';
    rewrite plain hrefs, so public-asset links get this build-time prefix.
    CV stays a plain string constant for cv-forge's rewiring. */
 const CV_HREF = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${CV}`;
+/* the English application route for Primis, McCann's adtech sub-company */
+const PRIMIS_HREF = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/primis`;
 const LINKEDIN = 'https://www.linkedin.com/in/barmoshe/';
 const GITHUB = 'https://github.com/barmoshe';
 const WHATSAPP = 'https://wa.me/972546561465';
@@ -722,6 +724,11 @@ export default function McCannApp() {
                     <a href={l.href}>{l.label}</a>
                   </li>
                 ))}
+                <li>
+                  <a href={PRIMIS_HREF} lang="en" dir="ltr">
+                    bar for Primis (EN)
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
