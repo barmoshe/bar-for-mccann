@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "../globals.css";
 
 // Root layout for the Hebrew, RTL McCann page. The site has two root layouts
@@ -15,7 +16,13 @@ export default function McCannLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-      <body>{children}</body>
+      <body>
+    <Script
+      src="https://bar-for-companies.vercel.app/track.js"
+      data-bar-for-id="mccann"
+      strategy="afterInteractive"
+    />
+{children}</body>
     </html>
   );
 }
